@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-    public Text ammoText;
     private GameObject player;
+    public TextMeshProUGUI ammoTextMesh;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,6 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ammoText.text = player.GetComponent<ShootBullet>().ammo + "/" + player.GetComponent<ShootBullet>().maxAmmo;
+        ammoTextMesh.text = player.GetComponent<ShootBullet>().ammo + "/" + player.GetComponent<ShootBullet>().maxAmmo;
     }
 }

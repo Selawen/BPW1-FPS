@@ -26,5 +26,13 @@ public class InputManager : MonoBehaviour
         {
             player.GetComponent<ShootBullet>().Reload();
         }
+
+        //double speed if left shift is pressed
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            player.GetComponentInChildren<CameraFollow>().speed = 20.0f;
+        } else {
+            player.GetComponentInChildren<CameraFollow>().speed = 10.0f;
+        }
     }
 }
