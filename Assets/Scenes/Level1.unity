@@ -449,12 +449,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!4 &720853968 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8506483797304988091, guid: 6a413dd6fc5a71d46925a0c55351ef16,
-    type: 3}
-  m_PrefabInstance: {fileID: 7663214065779424899}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &730302995
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +611,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &816031093 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2301092202985690650, guid: 6a413dd6fc5a71d46925a0c55351ef16,
+    type: 3}
+  m_PrefabInstance: {fileID: 7663214065779424899}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &923740859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1461,6 +1461,7 @@ GameObject:
   - component: {fileID: 1658505223}
   - component: {fileID: 1658505226}
   - component: {fileID: 1658505227}
+  - component: {fileID: 1658505228}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1538,6 +1539,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c14e2194d5d2f644899642a5dc6962d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1658505228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658505222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5dd904dc240e8846b427515270c33b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1732357314
@@ -2182,20 +2195,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3181083215808372299, guid: 86c7327d3bf8afc46b429e36ad29a00f,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 6933676411586017927, guid: 86c7327d3bf8afc46b429e36ad29a00f,
         type: 3}
       propertyPath: restPoint
       value: 
-      objectReference: {fileID: 720853968}
+      objectReference: {fileID: 816031093}
     - target: {fileID: 6933676411586017927, guid: 86c7327d3bf8afc46b429e36ad29a00f,
         type: 3}
       propertyPath: droneSpeed
-      value: 35
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6933676411586017927, guid: 86c7327d3bf8afc46b429e36ad29a00f,
         type: 3}
       propertyPath: rotationSpeed
-      value: 20.17
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6933676411586017927, guid: 86c7327d3bf8afc46b429e36ad29a00f,
+        type: 3}
+      propertyPath: destroyDelay
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7315819318541727523, guid: 86c7327d3bf8afc46b429e36ad29a00f,
         type: 3}

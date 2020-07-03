@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class Drone : Target
 {
-    [SerializeField] private int droneSpeed;
+    [SerializeField] private float droneSpeed;
     [SerializeField] [Range(0.0f, 1.0f)] protected float battery;
     private Vector3 targetPoint;
-    public Transform restPoint;
+    private float destinationTimer;
+    public GameObject restPoint;
     private Quaternion rotateTowards;
     [SerializeField] private float rotationSpeed;
 
+    private GameObject eventManager;
     private int fleeTime;
 
     protected State currentState;
@@ -26,7 +28,9 @@ public class Drone : Target
 
     private void Start()
     {
+        eventManager = GameObject.Find("EventSystem");
         target = this.gameObject;
+        randomDestination();
         currentState = State.idle;
     }
 
@@ -38,6 +42,7 @@ public class Drone : Target
         {
             currentState = State.die;
         }
+        destinationTimer -= 0.02f;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,7 +72,7 @@ public class Drone : Target
             case (State.rest):
                 if (battery < 1.0)
                 {
-                    battery += 0.01f;
+                    battery += 0.005f;
                 } else
                 {
                     currentState = State.idle;
@@ -75,8 +80,11 @@ public class Drone : Target
 
                 break;
             case (State.die):
+                //stop moving and fall
                 target.GetComponent<Rigidbody>().useGravity = true;
-
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
+                target.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
                 break;
         }
     }
@@ -87,30 +95,32 @@ public class Drone : Target
     /// <param name="moveSpeed">multiplier for movement speed</param>
     private void Move(float moveSpeed)
     {
-        if (Quaternion.Angle(target.transform.rotation, rotateTowards) >= 0.05)
+        if (Quaternion.Angle(target.transform.rotation, rotateTowards) >= 0.01)
         {
             //rotate towards destination
-            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, rotateTowards, rotationSpeed * moveSpeed * Time.deltaTime);
+            target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, rotateTowards, rotationSpeed * moveSpeed);
         } else {
             //move towards destination
             transform.Translate(Vector3.forward * droneSpeed * moveSpeed * Time.deltaTime);
         }
 
-        battery -= (0.001f * moveSpeed);
+        battery -= (0.0005f * moveSpeed);
 
         //if the drone isn't already moving towards the restpoint
         if (!(currentState == State.toRestpoint)){
             //drone moves towards restpoint when the battery drops below 30%
-            if (battery <= 0.3) {
-                targetPoint = restPoint.position;
+            if (battery <= 0.5f) {
+                targetPoint = restPoint.transform.position;
+                targetPoint.y = 0;
                 rotateTowards = Quaternion.LookRotation(targetPoint, Vector3.up);
                 currentState = State.toRestpoint;
                 return;
             } //set a new destination when the drone has reached the previous and has more than 30% battery
-            else             
-            if (Vector3.Distance(target.transform.position, targetPoint) <= 0.05f)
+            else
+            if (destinationTimer <= 0 || Vector3.Distance(target.transform.position, targetPoint) <= 0.05)
             {
                 randomDestination();
+                destinationTimer = Random.Range(0.5f, 2.0f)*(1.5f/moveSpeed);
             }
         }
     }
@@ -118,22 +128,28 @@ public class Drone : Target
     /// <summary>
     /// set new random destination
     /// </summary>
-    private void randomDestination() //doesn't work yet!
+    private void randomDestination() 
     {
-        Vector3 newDestination = Random.insideUnitSphere * 3;
-        targetPoint.x = newDestination.x;
-        targetPoint.z = newDestination.z;
+        targetPoint.x = Random.Range(-3, 3);
+        targetPoint.z = Random.Range(-3f, 3);
         rotateTowards = Quaternion.LookRotation(targetPoint, Vector3.up);
     }
 
+    /// <summary>
+    /// start fleeing when hit
+    /// </summary>
     public override void TargetHit()
     {
         base.TargetHit();
+
+        //play effect and make it bigger every hit
+        eventManager.GetComponent<ParticleManager>().HitParticles(target.GetComponentInChildren<ParticleSystem>(), health);
+
         if (currentState != State.die)
         {
             currentState = State.flee;
-            fleeTime += 5;
-            if (fleeTime <= 5)
+            fleeTime += 3;
+            if (fleeTime <= 3)
             {
                 StartCoroutine(ReturnToIdle());
             }
