@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float sideSpeed = 10.0f;
     public float horizontalLook = 2.0f;
     public float verticalLook = 2.0f;
     public float vRotation;
@@ -22,7 +21,7 @@ public class CameraFollow : MonoBehaviour
     {
         //movement over plane
         float forward = Input.GetAxis("Vertical") * speed;
-        float sideways = Input.GetAxis("Horizontal") * sideSpeed;
+        float sideways = Input.GetAxis("Horizontal") * speed;
 
         forward *= Time.deltaTime;
         sideways *= Time.deltaTime;

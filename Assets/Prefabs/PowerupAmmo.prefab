@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1080445943891760300}
   - component: {fileID: 6290301107179935395}
   - component: {fileID: 8443762123344520599}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4766,7 +4766,7 @@ GameObject:
   - component: {fileID: 7063507314870345349}
   - component: {fileID: 946222215783845067}
   - component: {fileID: 6684088087072409560}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PowerupAmmo
   m_TagString: Powerup
   m_Icon: {fileID: 0}
