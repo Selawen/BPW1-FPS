@@ -4956,13 +4956,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bff42604a963a114bb9fa9fce6ec8f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyDelay: 0
+  destroyDelay: 2
   health: 3
   maxSpawnCount: 1
-  droneSpeed: 4
+  pointsWorth: 50
+  droneSpeed: 10
   battery: 1
-  restPoint: {fileID: 0}
-  rotationSpeed: 1.2
+  restPoint: {fileID: 2301092202985690650, guid: 6a413dd6fc5a71d46925a0c55351ef16,
+    type: 3}
+  rotationSpeed: 20
 --- !u!54 &3181083215808372299
 Rigidbody:
   m_ObjectHideFlags: 0

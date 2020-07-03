@@ -30,9 +30,9 @@ public class InputManager : MonoBehaviour
         //double speed if left shift is pressed
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            player.GetComponentInChildren<CameraFollow>().speed = 20.0f;
+            player.GetComponentInChildren<PlayerMovement>().speed = 20.0f;
         } else {
-            player.GetComponentInChildren<CameraFollow>().speed = 10.0f;
+            player.GetComponentInChildren<PlayerMovement>().speed = 10.0f;
         }
     }
 }

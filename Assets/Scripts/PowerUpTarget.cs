@@ -6,17 +6,6 @@ public class PowerUpTarget : Target
 {
     public GameObject powerupTrigger;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        target = this.gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void TargetHit()
     {

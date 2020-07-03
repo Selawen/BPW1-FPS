@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public float speed = 10.0f;
     public float horizontalLook = 2.0f;

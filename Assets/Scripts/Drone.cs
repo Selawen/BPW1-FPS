@@ -12,7 +12,6 @@ public class Drone : Target
     private Quaternion rotateTowards;
     [SerializeField] private float rotationSpeed;
 
-    private GameObject eventManager;
     private int fleeTime;
 
     protected State currentState;
@@ -26,17 +25,16 @@ public class Drone : Target
         die
     };
 
-    private void Start()
+    protected override void Start()
     {
-        eventManager = GameObject.Find("EventSystem");
-        target = this.gameObject;
+        base.Start();
         randomDestination();
         currentState = State.idle;
     }
 
     private void FixedUpdate()
     {
-        Debug.Log(currentState);
+        //Debug.Log(currentState);
         DroneStates();
         if (battery <= 0.0)
         {
@@ -114,6 +112,7 @@ public class Drone : Target
                 targetPoint.y = 0;
                 rotateTowards = Quaternion.LookRotation(targetPoint, Vector3.up);
                 currentState = State.toRestpoint;
+                Debug.Log(targetPoint);
                 return;
             } //set a new destination when the drone has reached the previous and has more than 30% battery
             else

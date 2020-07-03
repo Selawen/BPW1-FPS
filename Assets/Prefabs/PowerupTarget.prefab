@@ -127,5 +127,6 @@ MonoBehaviour:
   destroyDelay: 0
   health: 2
   maxSpawnCount: 2
+  pointsWorth: 10
   powerupTrigger: {fileID: 1376238949362754492, guid: 3a16ea4bd51c5d540aa3db25992efd5a,
     type: 3}
