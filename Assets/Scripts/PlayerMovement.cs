@@ -23,11 +23,16 @@ public class PlayerMovement : MonoBehaviour
         float forward = Input.GetAxis("Vertical") * speed;
         float sideways = Input.GetAxis("Horizontal") * speed;
 
-        forward *= Time.deltaTime;
-        sideways *= Time.deltaTime;
+        //forward *= Time.deltaTime;
+        //sideways *= Time.deltaTime;
 
-        goPlayer.transform.Translate(0, 0, forward);
-        goPlayer.transform.Translate(sideways, 0, 0);
+        Vector3 newPosition = goPlayer.transform.position + (goPlayer.transform.forward * forward * Time.fixedDeltaTime + goPlayer.transform.right * sideways * Time.fixedDeltaTime);
+        newPosition.x = Mathf.Clamp(newPosition.x, -44, 35.3f);
+        newPosition.z = Mathf.Clamp(newPosition.z, -61, 36);
+        //goPlayer.GetComponent<Rigidbody>().AddForce(transform.position + transform.forward * forward * Time.fixedDeltaTime);
+        goPlayer.GetComponent<Rigidbody>().MovePosition(newPosition);
+        //goPlayer.transform.Translate(0, 0, forward);
+        //goPlayer.transform.Translate(sideways, 0, 0);
 
         //looking around with mouse
         float h = Input.GetAxis("Mouse X") * horizontalLook;

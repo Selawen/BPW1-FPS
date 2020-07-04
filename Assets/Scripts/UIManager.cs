@@ -7,16 +7,25 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     private GameObject player;
+    private GameOverScript gameOverScript;
+
     public TextMeshProUGUI ammoTextMesh;
     public TextMeshProUGUI pointsTextMesh;
+    public TextMeshProUGUI timeTextMesh;
+    public TextMeshProUGUI gameOverTextMesh;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        gameOverScript = GetComponent<GameOverScript>();
     }
 
-    // Update is called once per frame
+    private void FixedUpdate()
+    {
+        timeTextMesh.text = "Time: " + (int)(gameOverScript.gameOverTimer / 60) + ":" + (int)(gameOverScript.gameOverTimer % 60);
+    }
+
     public void UpdateText()
     {
         //change colour ammo text if out of ammo 
@@ -29,5 +38,12 @@ public class UIManager : MonoBehaviour
 
         ammoTextMesh.text = player.GetComponent<ShootBullet>().ammo + "/" + player.GetComponent<ShootBullet>().maxAmmo;
         pointsTextMesh.text = "Score: " + GetComponent<Score>().points;
+    }
+
+    public void GameOverText(string reason)
+    {
+        gameOverTextMesh.text = "<b>" + reason +"</b><br><br>" +
+            "Score: " + GetComponent<Score>().points + "<br>"
+                                + "Targets Killed: " + GetComponent<Score>().targetsKilled;
     }
 }

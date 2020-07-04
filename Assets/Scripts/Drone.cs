@@ -119,7 +119,7 @@ public class Drone : Target
             if (destinationTimer <= 0 || Vector3.Distance(target.transform.position, targetPoint) <= 0.05)
             {
                 randomDestination();
-                destinationTimer = Random.Range(0.5f, 2.0f)*(1.5f/moveSpeed);
+                destinationTimer = Random.Range(0.5f, 1.5f)*(1.5f/moveSpeed);
             }
         }
     }

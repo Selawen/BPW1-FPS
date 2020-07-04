@@ -8,6 +8,7 @@ public class ShootBullet : MonoBehaviour
     public int ammo;
     public int maxAmmo;
 
+    private GameObject player;
     protected GameObject eventManager;
 
     // Start is called before the first frame update
@@ -16,7 +17,8 @@ public class ShootBullet : MonoBehaviour
         maxAmmo = 5;
         ammo = 5;
         eventManager = GameObject.Find("EventSystem");
-}
+        player = GameObject.Find("Player");
+    }
 
 void Update()
     {
@@ -31,7 +33,7 @@ void Update()
 
                 if (bulletHit.transform != null)
                 {
-                    bulletHit.transform.Translate(Camera.main.transform.forward);
+                    bulletHit.transform.Translate(player.transform.forward, Space.World);
                     bulletHit.collider.GetComponentInParent<Target>().TargetHit();
                 }                
             }

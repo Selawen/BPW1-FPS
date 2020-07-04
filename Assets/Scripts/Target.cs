@@ -7,7 +7,9 @@ public class Target : MonoBehaviour
     protected GameObject target;
     public float destroyDelay;
     public int health;
+
     public int maxSpawnCount;
+    public int startSpawningAtWave;
     public int pointsWorth;
 
     protected GameObject eventManager;
@@ -34,6 +36,7 @@ public class Target : MonoBehaviour
             Destroy(target, destroyDelay);
             eventManager.GetComponent<Score>().AddPoints(pointsWorth);
             eventManager.GetComponent<UIManager>().UpdateText();
+            eventManager.GetComponent<GameOverScript>().gameOverTimer += (pointsWorth/10);
         }
     }
 }
