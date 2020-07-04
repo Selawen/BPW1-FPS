@@ -30,6 +30,8 @@ public class Score : MonoBehaviour
     {
         //amount of targets still active
         targetsAlive = waveScript.targetCounter - targetsKilled;
+        if (targetsAlive == 0) { gameObject.GetComponent<AddTargets>().AddNewTargets(3); }
+
 
         //game over when amount of active targets is too high
         if (targetsAlive >= gameOverLimit)

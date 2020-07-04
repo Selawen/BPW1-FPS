@@ -11,14 +11,20 @@ public class UIManager : MonoBehaviour
 
     public TextMeshProUGUI ammoTextMesh;
     public TextMeshProUGUI pointsTextMesh;
+    public TextMeshProUGUI highscoreTextMesh;
     public TextMeshProUGUI timeTextMesh;
     public TextMeshProUGUI gameOverTextMesh;
+    public GameObject newHighscoreTextMesh;
+
+    private Color defaultColour;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         gameOverScript = GetComponent<GameOverScript>();
+        defaultColour = ammoTextMesh.color;
+        UpdateText();
     }
 
     private void FixedUpdate()
@@ -33,15 +39,23 @@ public class UIManager : MonoBehaviour
         {
             ammoTextMesh.color = Color.red;
         } else {
-            ammoTextMesh.color = new Color(0.09611962f, 0.2451054f, 0.754717f, 1);
+            ammoTextMesh.color = defaultColour;
         }
 
+        //change colour highscore text if new highscore
+        if (GetComponent<Score>().points > PlayerPrefs.GetInt("highscore", 0))
+        {
+            highscoreTextMesh.color = Color.green;
+        }
+            
         ammoTextMesh.text = player.GetComponent<ShootBullet>().ammo + "/" + player.GetComponent<ShootBullet>().maxAmmo;
-        pointsTextMesh.text = "Score: " + GetComponent<Score>().points;
+        pointsTextMesh.text = "Score: <b>" + GetComponent<Score>().points + "</b>";
+        highscoreTextMesh.text = "Highscore: " + Mathf.Max(GetComponent<Score>().points, PlayerPrefs.GetInt("highscore", 0));
     }
 
-    public void GameOverText(string reason)
+    public void GameOverText(string reason, bool newHighscore)
     {
+        newHighscoreTextMesh.SetActive(newHighscore);
         gameOverTextMesh.text = "<b>" + reason +"</b><br><br>" +
             "Score: " + GetComponent<Score>().points + "<br>"
                                 + "Targets Killed: " + GetComponent<Score>().targetsKilled;

@@ -47,6 +47,11 @@ public class PauzeMenu : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+    public void ReloadScene(string sceneName)
+    {
+        Time.timeScale = 1.0f;
+        SceneManager.LoadScene(sceneName);
+    }
 
     public void HowToPlay(bool setActive)
     {

@@ -6,13 +6,14 @@ public class GameOverScript : MonoBehaviour
 {
     public float gameOverTimer;
     private GameObject gameOverPanel;
+    bool newHighscore;
 
     // Start is called before the first frame update
     void Start()
     {
         if (gameOverTimer == 0)
         {
-            gameOverTimer = 60;
+            gameOverTimer = 30;
         }
 
         gameOverPanel = GameObject.Find("GameOverScreen");
@@ -37,6 +38,15 @@ public class GameOverScript : MonoBehaviour
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
-        GetComponent<UIManager>().GameOverText(reason);
+        
+
+        if (GetComponent<Score>().points > PlayerPrefs.GetInt("highscore", 0))
+        {
+            newHighscore = true;
+            PlayerPrefs.SetInt("highscore", GetComponent<Score>().points);
+            PlayerPrefs.Save();
+        } else { newHighscore = false; }
+
+        GetComponent<UIManager>().GameOverText(reason, newHighscore);
     }
 }

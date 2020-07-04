@@ -12,6 +12,8 @@ public class Drone : Target
     private Quaternion rotateTowards;
     [SerializeField] private float rotationSpeed;
 
+    private bool justRotated;
+
     private int fleeTime;
 
     protected State currentState;
@@ -93,7 +95,16 @@ public class Drone : Target
     /// <param name="moveSpeed">multiplier for movement speed</param>
     private void Move(float moveSpeed)
     {
-        if (Quaternion.Angle(target.transform.rotation, rotateTowards) >= 0.01)
+        //turn back if out of bounds
+        if(!justRotated && (target.transform.position.x > 35 || target.transform.position.x < -43 || target.transform.position.z > 35 || target.transform.position.z < -60))
+        {
+            justRotated = true;
+            targetPoint *= (-1);
+            rotateTowards = Quaternion.LookRotation(targetPoint, Vector3.up);
+        }
+
+
+        if (Quaternion.Angle(target.transform.rotation, rotateTowards) >= 0.001f)
         {
             //rotate towards destination
             target.transform.rotation = Quaternion.RotateTowards(target.transform.rotation, rotateTowards, rotationSpeed * moveSpeed);
@@ -132,6 +143,7 @@ public class Drone : Target
         targetPoint.x = Random.Range(-3, 3);
         targetPoint.z = Random.Range(-3f, 3);
         rotateTowards = Quaternion.LookRotation(targetPoint, Vector3.up);
+        justRotated = false;
     }
 
     /// <summary>

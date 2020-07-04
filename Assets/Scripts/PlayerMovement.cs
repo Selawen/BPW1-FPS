@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
         newPosition.x = Mathf.Clamp(newPosition.x, -44, 35.3f);
         newPosition.z = Mathf.Clamp(newPosition.z, -61, 36);
         //goPlayer.GetComponent<Rigidbody>().AddForce(transform.position + transform.forward * forward * Time.fixedDeltaTime);
-        goPlayer.GetComponent<Rigidbody>().MovePosition(newPosition);
-        //goPlayer.transform.Translate(0, 0, forward);
+        //goPlayer.GetComponent<Rigidbody>().MovePosition(newPosition);
+        goPlayer.transform.position = newPosition;
         //goPlayer.transform.Translate(sideways, 0, 0);
 
         //looking around with mouse

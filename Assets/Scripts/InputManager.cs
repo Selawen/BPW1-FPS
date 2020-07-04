@@ -17,11 +17,13 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //pause when esc is pressed
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             pause.GetComponent<PauzeMenu>().TogglePause();
         }
 
+        //reload with R
         if (Input.GetKeyUp(KeyCode.R))
         {
             player.GetComponent<ShootBullet>().Reload();
@@ -31,8 +33,16 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             player.GetComponentInChildren<PlayerMovement>().speed = 20.0f;
-        } else {
+        }
+        else
+        {
             player.GetComponentInChildren<PlayerMovement>().speed = 10.0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            PlayerPrefs.SetInt("highscore", 0);
+            PlayerPrefs.Save();
         }
     }
 }

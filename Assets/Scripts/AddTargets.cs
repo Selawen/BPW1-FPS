@@ -9,7 +9,7 @@ public class AddTargets : MonoBehaviour
     public int waveCounter { get; private set; }
     private int waveTimer;
     [SerializeField] private int waveDelay;
-    [SerializeField] private int waveMultiplier;
+    [SerializeField] private float waveMultiplier;
 
     private Vector3 instantiatePos;
     [SerializeField] private Vector3 offset;
@@ -60,7 +60,7 @@ public class AddTargets : MonoBehaviour
                 {
                     do
                     {
-                        instantiatePos = (Random.insideUnitSphere * Random.Range(1, 100)) + offset;
+                        instantiatePos = (Random.insideUnitSphere * Random.Range(1, 70)) + offset;
                         colliderTest = Physics.OverlapBox(instantiatePos, target.transform.localScale / 2, Quaternion.identity);
                     } while (colliderTest.Length > 0);
 
@@ -75,7 +75,7 @@ public class AddTargets : MonoBehaviour
             }
         }
         waveCounter++;
-        waveTimer = waveDelay - (wave * waveMultiplier);
+        waveTimer = waveDelay - (int)(wave * waveMultiplier);
         waveTimer = Mathf.Clamp(waveTimer ,1 , 30);
         StartCoroutine(WaveTimer());
     }
@@ -88,10 +88,4 @@ public class AddTargets : MonoBehaviour
         }
         AddNewTargets(waveCounter);
     }
-
-    /*
-     * shoot with particle
-     * highscore
-     * mouselookspeed slider in menu
-     */
 }

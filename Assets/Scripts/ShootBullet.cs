@@ -24,14 +24,14 @@ void Update()
     {
         if (Input.GetMouseButtonDown(0) && ammo > 0)
         {
-            Debug.Log("shoot!");
+            //Debug.Log("shoot!");
             ammo--;
             eventManager.GetComponent<UIManager>().UpdateText();
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out bulletHit, 1000))
             {
                 //Debug.Log("target found");
 
-                if (bulletHit.transform != null)
+                if (bulletHit.rigidbody != null)
                 {
                     bulletHit.transform.Translate(player.transform.forward, Space.World);
                     bulletHit.collider.GetComponentInParent<Target>().TargetHit();
