@@ -12,16 +12,19 @@ public class InputManager : MonoBehaviour
     {
         pause = GameObject.Find("UICanvas");
         player = GameObject.Find("Player");
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //pause when esc is pressed
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             pause.GetComponent<PauzeMenu>().TogglePause();
         }
 
+        //reload with R
         if (Input.GetKeyUp(KeyCode.R))
         {
             player.GetComponent<ShootBullet>().Reload();
@@ -30,9 +33,17 @@ public class InputManager : MonoBehaviour
         //double speed if left shift is pressed
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            player.GetComponentInChildren<CameraFollow>().speed = 20.0f;
-        } else {
-            player.GetComponentInChildren<CameraFollow>().speed = 10.0f;
+            player.GetComponentInChildren<PlayerMovement>().speed = 20.0f;
+        }
+        else
+        {
+            player.GetComponentInChildren<PlayerMovement>().speed = 10.0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            PlayerPrefs.SetInt("highscore", 0);
+            PlayerPrefs.Save();
         }
     }
 }

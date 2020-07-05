@@ -6,24 +6,13 @@ public class PowerUpTarget : Target
 {
     public GameObject powerupTrigger;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        target = this.gameObject;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public override void TargetHit()
     {
         base.TargetHit();
         if (health == 0)
         {
-            Instantiate(powerupTrigger, target.transform.position + new Vector3(0,0,0), target.transform.rotation);
+            Instantiate(powerupTrigger, target.transform.position + new Vector3(0,0,0), new Quaternion(0,0,0,1));
         }
     }
 }

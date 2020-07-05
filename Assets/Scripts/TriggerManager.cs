@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TriggerManager : MonoBehaviour
 {
+    protected GameObject eventManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        eventManager = GameObject.Find("EventSystem");
     }
 
     // Update is called once per frame
@@ -23,5 +25,6 @@ public class TriggerManager : MonoBehaviour
             GetComponent<ShootBullet>().maxAmmo += 2;
             Destroy(other.gameObject);
         }
+        eventManager.GetComponent<UIManager>().UpdateText();
     }
 }

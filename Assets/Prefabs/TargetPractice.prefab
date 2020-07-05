@@ -126,3 +126,4 @@ MonoBehaviour:
   destroyDelay: 0.2
   health: 3
   maxSpawnCount: 5
+  pointsWorth: 20

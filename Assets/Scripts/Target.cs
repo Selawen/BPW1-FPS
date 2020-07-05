@@ -7,19 +7,21 @@ public class Target : MonoBehaviour
     protected GameObject target;
     public float destroyDelay;
     public int health;
+
     public int maxSpawnCount;
+    public int startSpawningAtWave;
+    public int pointsWorth;
+
+    protected GameObject eventManager;
+
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         target = this.gameObject;
+        eventManager = GameObject.Find("EventSystem");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     /// <summary>
     /// decreases health upon hit
@@ -32,6 +34,9 @@ public class Target : MonoBehaviour
         if (health == 0)
         {
             Destroy(target, destroyDelay);
+            eventManager.GetComponent<Score>().AddPoints(pointsWorth);
+            eventManager.GetComponent<UIManager>().UpdateText();
+            eventManager.GetComponent<GameOverScript>().gameOverTimer += (pointsWorth/10);
         }
     }
 }

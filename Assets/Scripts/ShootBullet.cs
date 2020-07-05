@@ -8,37 +8,44 @@ public class ShootBullet : MonoBehaviour
     public int ammo;
     public int maxAmmo;
 
+    private GameObject player;
+    protected GameObject eventManager;
+
     // Start is called before the first frame update
     void Start()
     {
         maxAmmo = 5;
         ammo = 5;
+        eventManager = GameObject.Find("EventSystem");
+        player = GameObject.Find("Player");
     }
 
-    void Update()
+void Update()
     {
-        if (Input.GetMouseButtonDown(0) && ammo > 0)
+        if (Time.timeScale > 0 && Input.GetMouseButtonDown(0) && ammo > 0)
         {
-            Debug.Log("shoot!");
+            //Debug.Log("shoot!");
             ammo--;
+            eventManager.GetComponent<UIManager>().UpdateText();
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out bulletHit, 1000))
             {
-                Debug.Log("target found");
+                //Debug.Log("target found");
 
-                if (bulletHit.transform != null)
+                if (bulletHit.rigidbody != null)
                 {
-                    bulletHit.transform.Translate(Camera.main.transform.forward);
+                    bulletHit.transform.Translate(player.transform.forward, Space.World);
                     bulletHit.collider.GetComponentInParent<Target>().TargetHit();
-                }
+                }                
             }
-        } else if (Input.GetMouseButtonDown(0) && ammo <= 0)
-        {
-            Debug.Log("out of ammo!");
-        }
+        } //else if (Input.GetMouseButtonDown(0) && ammo <= 0)
+        //{
+            //Debug.Log("out of ammo!");
+        //}
     }
 
     public void Reload()
     {
         ammo = maxAmmo;
+        GameObject.Find("EventSystem").GetComponent<UIManager>().UpdateText();
     }
 }
