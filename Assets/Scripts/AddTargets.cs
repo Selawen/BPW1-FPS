@@ -14,6 +14,7 @@ public class AddTargets : MonoBehaviour
     private Vector3 instantiatePos;
     [SerializeField] private Vector3 offset;
     private Collider[] colliderTest;
+    private bool outOfRange;
 
     public int targetCounter;
 
@@ -29,7 +30,7 @@ public class AddTargets : MonoBehaviour
 
         if (waveDelay == 0)
         {
-            waveDelay = 20;
+            waveDelay = 10;
         }
 
         if (waveMultiplier == 0)
@@ -62,7 +63,13 @@ public class AddTargets : MonoBehaviour
                     {
                         instantiatePos = (Random.insideUnitSphere * Random.Range(1, 70)) + offset;
                         colliderTest = Physics.OverlapBox(instantiatePos, target.transform.localScale / 2, Quaternion.identity);
-                    } while (colliderTest.Length > 0);
+
+                        if (instantiatePos.x > 35 || instantiatePos.x < -43 || instantiatePos.z > 35 || instantiatePos.z < -60) {
+                            outOfRange = true;
+                        }
+                        else { outOfRange = false; }
+
+                    } while (colliderTest.Length > 0 || outOfRange);
 
                     GameObject newTarget = Instantiate(target, instantiatePos, Quaternion.Euler(0, Random.Range(0,360), 0));
                     //actually spawn target

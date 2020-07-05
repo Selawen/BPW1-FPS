@@ -12,7 +12,7 @@ public class PowerUpTarget : Target
         base.TargetHit();
         if (health == 0)
         {
-            Instantiate(powerupTrigger, target.transform.position + new Vector3(0,0,0), target.transform.rotation);
+            Instantiate(powerupTrigger, target.transform.position + new Vector3(0,0,0), new Quaternion(0,0,0,1));
         }
     }
 }

@@ -17,6 +17,8 @@ public class PauzeMenu : MonoBehaviour
         howToPlayPanel = GameObject.Find("HowToPlay");
         pauseMenu.SetActive(false);
         howToPlayPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class PauzeMenu : MonoBehaviour
         Time.timeScale = (!GamePaused ? 1 : 0);
         //lock cursor during gameplay, unlock when paused
         Cursor.lockState = (GamePaused ? CursorLockMode.None : CursorLockMode.Locked);
+        Cursor.visible = GamePaused;
 
         pauseMenu.SetActive(GamePaused);
     }

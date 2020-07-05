@@ -37,7 +37,7 @@ public class UIManager : MonoBehaviour
         //change colour ammo text if out of ammo 
         if (player.GetComponent<ShootBullet>().ammo == 0)
         {
-            ammoTextMesh.color = Color.red;
+            ammoTextMesh.color = Color.grey;
         } else {
             ammoTextMesh.color = defaultColour;
         }

@@ -878,17 +878,17 @@ ParticleSystem:
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         - serializedVersion: 3
           time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
+          value: 0
+          inSlope: -2
+          outSlope: -2
           tangentMode: 0
           weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.33333334
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
@@ -1313,7 +1313,7 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 50115
+        ctime1: 45296
         ctime2: 62451
         ctime3: 64764
         ctime4: 0
@@ -3764,7 +3764,7 @@ ParticleSystem:
       emitProbability: 1
   LightsModule:
     enabled: 1
-    ratio: 0
+    ratio: 1
     light: {fileID: 7149887466320491875}
     randomDistribution: 1
     color: 1
@@ -4710,7 +4710,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fd5baf009318b21489803b6fa2b965aa, type: 2}
+  - {fileID: 10301, guid: 0000000000000000f000000000000000, type: 0}
   - {fileID: 2100000, guid: fd5baf009318b21489803b6fa2b965aa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -4797,7 +4797,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8490566, g: 0.0040049935, b: 0.0040049935, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -4946,12 +4946,12 @@ MonoBehaviour:
   destroyDelay: 1
   health: 3
   maxSpawnCount: 1
-  startSpawningAtWave: 0
+  startSpawningAtWave: 5
   pointsWorth: 50
-  droneSpeed: 4
+  droneSpeed: 8
   battery: 1
   restPoint: {fileID: 0}
-  rotationSpeed: 1.2
+  rotationSpeed: 20
 --- !u!54 &3181083215808372299
 Rigidbody:
   m_ObjectHideFlags: 0

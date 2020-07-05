@@ -38,7 +38,7 @@ public class GameOverScript : MonoBehaviour
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.None;
-        
+        Cursor.visible = true;
 
         if (GetComponent<Score>().points > PlayerPrefs.GetInt("highscore", 0))
         {

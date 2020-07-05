@@ -12,6 +12,7 @@ public class InputManager : MonoBehaviour
     {
         pause = GameObject.Find("UICanvas");
         player = GameObject.Find("Player");
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame

@@ -22,7 +22,7 @@ public class ShootBullet : MonoBehaviour
 
 void Update()
     {
-        if (Input.GetMouseButtonDown(0) && ammo > 0)
+        if (Time.timeScale > 0 && Input.GetMouseButtonDown(0) && ammo > 0)
         {
             //Debug.Log("shoot!");
             ammo--;
@@ -37,10 +37,10 @@ void Update()
                     bulletHit.collider.GetComponentInParent<Target>().TargetHit();
                 }                
             }
-        } else if (Input.GetMouseButtonDown(0) && ammo <= 0)
-        {
+        } //else if (Input.GetMouseButtonDown(0) && ammo <= 0)
+        //{
             //Debug.Log("out of ammo!");
-        }
+        //}
     }
 
     public void Reload()
